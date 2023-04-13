@@ -62,6 +62,18 @@ public class TaskappController {
     	}
     	throw new InvalidCategoryException( ErrorMessageConstants.INVALID_SUBCATEGORY , ErrorMessageDescription.INVALID_SUBCATEGORY );
     }
+
+    
+    @RequestMapping(value ="/description/{description}", method= RequestMethod.GET)
+    public ResponseEntity<List<Task>> fetchTaskByDescription(@PathVariable("description" ) String description) {
+   	
+    	List<Task> allTasks = taskService.getTasksByDescription(description);
+    	if ( Objects.nonNull(allTasks)) {
+    	 	return new ResponseEntity<>( allTasks, HttpStatus.OK); 			
+    	}
+    	throw new InvalidCategoryException( ErrorMessageConstants.INVALID_REQUEST , ErrorMessageDescription.INVALID_DESCRIPTION );
+    }
+
     
 
     @RequestMapping(value="/create" , method= RequestMethod.POST) 

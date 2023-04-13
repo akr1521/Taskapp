@@ -54,6 +54,13 @@ public class TaskService {
     	 return	mongoTemplate.find(  query, Task.class);
     }
     
+    public List<Task> getTasksByDescription(String description){
+    	 	Query query  = new Query() ;
+    	 	TextCriteria criteria= TextCriteria.forDefaultLanguage().matchingPhrase(description);
+    	 	query.addCriteria( criteria);
+    	 return  mongoTemplate.find( query, Task.class);
+    }
+    
     public List<Task>  getTaskBySubCategory( String subCategory  )  {
 	    Query query = new Query  () ;
 //      List<List<Subtask>>  subtasks =getAllTasks().parallelStream().map( subtask -> subtask.getSubtasks()).collect(Collectors.toList()) ;
